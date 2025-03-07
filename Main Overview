@@ -1,0 +1,42 @@
+# Zeros Don’t Lie: A Data-Driven Apology
+
+## Overview
+A personal analysis of academic performance, procrastination, and self-reflection using data visualization and predictive modeling.
+
+## Repository Structure
+```
+Zeros-Dont-Lie/
+│-- data/
+│   ├── personal_grades.csv
+│-- scripts/
+│   ├── data_analysis.R
+│   ├── procrastination_patterns.R
+│-- visualizations/
+│   ├── grade_trends.png
+│   ├── submission_timeline.png
+│-- README.md
+│-- final_presentation.pdf
+```
+
+## Technologies Used
+- R (ggplot2, dplyr, tidymodels)
+- Logistic Regression
+- Data Visualization
+
+## Key Insights
+- Late submissions had a significant impact on overall grades.
+- Predictive analysis showed how hypothetical effort adjustments could lead to an 84% total grade.
+- Visual patterns revealed inconsistencies in academic discipline.
+
+## Getting Started
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/username/Zeros-Dont-Lie.git
+   ```
+2. Run `data_analysis.R` to preprocess and clean the dataset.
+3. Use `procrastination_patterns.R` to analyze submission behaviors.
+4. View results in `visualizations/` folder.
+
+---
+
+These repositories serve as both portfolio pieces and technical demonstrations of data-driven storytelling.
