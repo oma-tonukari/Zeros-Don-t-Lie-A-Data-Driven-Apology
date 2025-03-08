@@ -1,0 +1,44 @@
+grades <- data.frame(
+ Assignment_Type = c("Homework", "Homework", "Homework", "Homework", "Quiz",
+"Quiz", "Exam", "Project"),
+ Assignment_Name = c("HW #1", "HW #2", "HW #4", "HW #8", "Quiz #1", "Quiz
+#6", "Midterm Exam Part 1", "DAP II"),
+ Grade_Percentage = c(0, 0, 95, 95, 100, 100, 64, 0),
+ Due_Date = as.Date(c("2024-08-31", "2024-09-12", "2024-09-28", "2024-10-
+19", "2024-09-01", "2024-10-16", "2024-10-18", "2024-10-05")),
+ Submitted_On = as.Date(c("2024-09-27", "2024-10-12", "2024-10-12", "2024-
+11-02", NA, NA, NA, "2024-11-08")),
+ Late = c("Yes", "Yes", "Yes", "Yes", "No", "No", "No", "Yes"),
+ Category_Weight = c(3, 10, 15, 5, 5, 5, 10, 20)
+)
+names(grades)
+## [1] "Assignment_Type" "Assignment_Name" "Grade_Percentage" "Due_Date"
+## [5] "Submitted_On" "Late" "Category_Weight"
+print(grades)
+## Assignment_Type Assignment_Name Grade_Percentage Due_Date
+Submitted_On
+## 1 Homework HW #1 0 2024-08-31 2024-
+09-27
+## 2 Homework HW #2 0 2024-09-12 2024-
+10-12
+## 3 Homework HW #4 95 2024-09-28 2024-
+10-12
+## 4 Homework HW #8 95 2024-10-19 2024-
+11-02
+## 5 Quiz Quiz #1 100 2024-09-01
+<NA>
+## 6 Quiz Quiz #6 100 2024-10-16
+<NA>
+## 7 Exam Midterm Exam Part 1 64 2024-10-18
+<NA>
+## 8 Project DAP II 0 2024-10-05 2024-
+11-08
+## Late Category_Weight
+## 1 Yes 3
+## 2 Yes 10
+## 3 Yes 15
+## 4 Yes 5
+## 5 No 5
+## 6 No 5
+## 7 No 10
+## 8 Yes 20
