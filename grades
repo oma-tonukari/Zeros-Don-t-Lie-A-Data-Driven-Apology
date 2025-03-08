@@ -60,3 +60,88 @@ summary(grades)
 ## 3rd Qu.:2024-11-02 3rd Qu.:11.250
 ## Max. :2024-11-08 Max. :20.000
 ## NA's :3
+
+grades <- grades %>%
+ mutate(Weighted_Score = Grade_Percentage * Category_Weight / 100)
+total_score <- sum(grades$Weighted_Score, na.rm = TRUE)
+total_weight <- sum(grades$Category_Weight)
+final_grade <- total_score / total_weight * 100
+cat("Current Total Grade:", round(final_grade, 2), "%\n")
+
+## Current Total Grade: 48.49 % 
+
+grades <- grades %>%
+ mutate(Outcome = ifelse(Grade_Percentage > 0, 1, 0))
+log_model <- glm(Outcome ~ Category_Weight + Late, data = grades, family =
+binomial)
+grades$Predicted_Probability <- predict(log_model, type = "response")
+grades$Late <- as.factor(grades$Late)
+ggplot(grades, aes(x = Category_Weight, y = Predicted_Probability, color =
+Late)) +
+ geom_point(size = 3) +
+ geom_smooth(method = "lm", se = FALSE, color = "blue") +
+ labs(title = "Predicted Probability of Accepted Assignments",
+ x = "Assignment Weight (%)",
+ y = "Predicted Probability") +
+ theme_minimal() +
+ theme(
+ plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+ axis.text = element_text(size = 12),
+ axis.title = element_text(size = 14)
+ )
+## `geom_smooth()` using formula = 'y ~ x'
+
+ggplot(grades, aes(x = Assignment_Type, y = Grade_Percentage, fill = Late)) +
+ geom_bar(stat = "summary", fun = "mean", position = "dodge") +
+ labs(title = "Average Grade by Assignment Type",
+ x = "Assignment Type", y = "Average Grade (%)") +
+ theme_minimal()
+
+ggplot(grades, aes(x = Due_Date, y = Grade_Percentage)) +
+ geom_point(aes(color = Late), size = 3) +
+ geom_line(aes(group = 1), color = "blue", linetype = "dashed") +
+ labs(title = "Submission Trends: Due Date vs Grade",
+ x = "Due Date", y = "Grade (%)") +
+ theme_minimal()
+
+grades <- grades %>%
+ mutate(Predicted_Grade = ifelse(Late == "Yes" & Grade_Percentage == 0, 80,
+Grade_Percentage)) %>%
+ mutate(Predicted_Weighted_Score = Predicted_Grade * Category_Weight / 100)
+predicted_score <- sum(grades$Predicted_Weighted_Score, na.rm = TRUE)
+predicted_final_grade <- predicted_score / total_weight * 100
+cat("Predicted Total Grade (if late submissions were 80%):",
+round(predicted_final_grade, 2), "%\n")
+## Predicted Total Grade (if late submissions were 80%): 84.66 %
+
+accepted_grades <- grades %>% filter(Grade_Percentage > 0)
+accepted_summary <- accepted_grades %>%
+
+ summarise(
+ Average_Grade = mean(Grade_Percentage),
+ Median_Grade = median(Grade_Percentage),
+ Total_Assignments = n(),
+ Max_Grade = max(Grade_Percentage),
+ Min_Grade = min(Grade_Percentage)
+ )
+print(accepted_summary)
+## Average_Grade Median_Grade Total_Assignments Max_Grade Min_Grade
+## 1 90.8 95 5 100 64
+
+ggplot(accepted_grades, aes(x = Due_Date, y = Grade_Percentage)) +
+ geom_point(size = 3, color = "darkgreen") +
+ geom_line(aes(group = 1), color = "blue", size = 1) +
+ labs(title = "Performance on Accepted Assignments",
+ x = "Due Date", y = "Grade (%)") +
+ theme_minimal() +
+ theme(
+ plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+ axis.text = element_text(size = 12),
+ axis.title = element_text(size = 14)
+ )
+## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+
