@@ -42,3 +42,21 @@ Submitted_On
 ## 6 No 5
 ## 7 No 10
 ## 8 Yes 20
+
+summary(grades)
+## Assignment_Type Assignment_Name Grade_Percentage Due_Date
+## Length:8 Length:8 Min. : 0.00 Min. :2024-08-31
+## Class :character Class :character 1st Qu.: 0.00 1st Qu.:2024-09-09
+## Mode :character Mode :character Median : 79.50 Median :2024-10-01
+## Mean : 56.75 Mean :2024-09-27
+## 3rd Qu.: 96.25 3rd Qu.:2024-10-16
+## Max. :100.00 Max. :2024-10-19
+##
+## Submitted_On Late Category_Weight
+## Min. :2024-09-27 Length:8 Min. : 3.000
+## 1st Qu.:2024-10-12 Class :character 1st Qu.: 5.000
+## Median :2024-10-12 Mode :character Median : 7.500
+## Mean :2024-10-18 Mean : 9.125
+## 3rd Qu.:2024-11-02 3rd Qu.:11.250
+## Max. :2024-11-08 Max. :20.000
+## NA's :3
